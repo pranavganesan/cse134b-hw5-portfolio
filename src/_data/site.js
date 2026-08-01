@@ -4,7 +4,7 @@ module.exports = {
   title: "Pranav Ganesan | Portfolio",
   author: "Pranav Ganesan",
   email: "prganesan@ucsd.edu",
-  url: "https://REPLACE-WITH-YOUR-NETLIFY-URL.netlify.app",
+  url: "https://lucent-babka-e18485.netlify.app",
   year: new Date().getFullYear(),
   nav: [
     { label: "Home", url: "/" },
