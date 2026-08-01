@@ -122,7 +122,7 @@ no libraries.
 I chose **Eleventy** with Nunjucks templates. Structure under `src/`:
 
 - `_includes/layouts/base.njk` — the base layout owning the document shell:
-  doctype, the head include, skip link, noscript note, and the main wrapper.
+  doctype, the head include, skip link, and the main wrapper.
 - `_includes/partials/` — three shared includes used by every page:
   `head.njk` (metadata partial: charset, viewport, per-page title/description,
   stylesheet and script references, anti-flash snippet), `header.njk` (brand +
