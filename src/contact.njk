@@ -1,0 +1,44 @@
+---
+layout: layouts/base.njk
+title: Contact
+description: "Get in touch with Pranav Ganesan."
+permalink: /contact/
+---
+<section>
+  <h1>Contact</h1>
+  <p>Email's the fastest way to reach me. There's also a form below if you'd rather
+  use that. <strong>Anything marked required actually needs to be filled in.</strong></p>
+  <p>Email: <a href="mailto:{{ site.email }}">{{ site.email }}</a></p>
+</section>
+
+<section>
+  <h2>Send a Message</h2>
+  <form action="#" method="get">
+    <fieldset>
+      <legend>Message details</legend>
+
+      <p>
+        <label for="name">Name</label><br>
+        <input type="text" id="name" name="name" required minlength="2" maxlength="60"
+               title="Please enter your name (at least 2 characters).">
+      </p>
+      <p>
+        <label for="email">Email</label><br>
+        <input type="email" id="email" name="email" required
+               title="Please enter a valid email address.">
+      </p>
+      <p>
+        <label for="reason">Reason for contact</label><br>
+        <input type="text" id="reason" name="reason" maxlength="80">
+      </p>
+      <p>
+        <label for="message">Message</label><br>
+        <textarea id="message" name="message" rows="5" cols="40" required minlength="10" maxlength="1000"></textarea>
+      </p>
+      <p>
+        <button type="submit">Send Message</button>
+        <button type="reset">Clear Form</button>
+      </p>
+    </fieldset>
+  </form>
+</section>

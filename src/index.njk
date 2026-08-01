@@ -1,0 +1,65 @@
+---
+layout: layouts/base.njk
+title: Home
+description: "Computer science student portfolio: projects, background, and contact information."
+scripts:
+  - gh-activity.js
+---
+<section>
+  <h1>{{ site.author }}</h1>
+  <p>I'm a computer science student who likes building things that <em>actually</em>
+  work end to end, not just look nice in a screenshot.<br>
+  Looking for internships for summer 2027.</p>
+  <p>
+    <skill-chip>HTML5</skill-chip>
+    <skill-chip>CSS3</skill-chip>
+    <skill-chip>JavaScript</skill-chip>
+    <skill-chip>Python</skill-chip>
+  </p>
+  <p><a href="/projects/">View my projects</a> &middot; <a href="/about/">About me</a></p>
+</section>
+
+<section>
+  <h2>Featured Projects</h2>
+  {%- for project in projects %}
+  <article>
+    <h3><a href="/projects/{{ project.slug }}/">{{ project.title }}</a></h3>
+    <img src="{{ project.image }}" alt="{{ project.alt }}" width="320" height="190">
+    <p>{{ project.blurb }}</p>
+  </article>
+  {%- endfor %}
+</section>
+
+<section>
+  <h2>Latest on GitHub</h2>
+  <p>A live feed of my most recently updated public repositories, fetched from the
+  GitHub REST API by a custom element I wrote for this assignment.</p>
+
+  <template id="gh-activity-template">
+    <p class="gh-status" role="status"></p>
+    <ul class="gh-repos"></ul>
+    <p class="gh-actions">
+      <button type="button" class="gh-retry" hidden>Retry</button>
+    </p>
+    <p class="gh-credit"><small>Data from the GitHub REST API.</small></p>
+  </template>
+  <template id="gh-repo-template">
+    <li>
+      <a class="gh-name"></a>
+      <p class="gh-desc"></p>
+      <p class="gh-meta"><span class="gh-lang"></span> <span class="gh-stars"></span> <time class="gh-updated" datetime="2026-01-01"></time></p>
+    </li>
+  </template>
+
+  <gh-activity user="pranavganesan" count="5" data-state="idle">
+    <p>This widget needs JavaScript to load live data. You can browse my repositories
+    directly on <a href="https://github.com/pranavganesan">my GitHub profile</a> instead.</p>
+  </gh-activity>
+</section>
+
+<section>
+  <h2>A Few Things About Me</h2>
+  <p>I've shipped <b>3</b> projects for classes so far, with more on the way.</p>
+  <p>I've been writing code for about <b>2</b> years now.</p>
+  <p>Python is still my favorite language by a good margin.</p>
+</section>

@@ -1,0 +1,77 @@
+---
+layout: layouts/base.njk
+title: Experiments
+description: "HTML5 tag experiments: template, audio, video, canvas, source, and MathML."
+permalink: /experiments/
+scripts:
+  - canvas-demo.js
+---
+<section>
+  <h1>Experiments</h1>
+  <p>This page demonstrates a handful of HTML5 tags that don't have a natural home
+  on the portfolio pages: &lt;template&gt;, &lt;audio&gt;, &lt;video&gt;,
+  &lt;canvas&gt;, and &lt;source&gt;. It also includes a MathML example.</p>
+</section>
+
+<section>
+  <h2>Template</h2>
+  <p>The markup below lives inside a &lt;template&gt; element. It is inert and is
+  not rendered by the browser unless cloned with JavaScript, which this page
+  intentionally does not do. (The home page's GitHub widget <em>does</em> clone
+  templates — that's the real-world version of this demo.)</p>
+  <template id="card-template">
+    <article>
+      <h3>Templated Card</h3>
+      <p>This content only exists inside the template's document fragment.</p>
+    </article>
+  </template>
+</section>
+
+<section>
+  <h2>Audio</h2>
+  <p>A three-second generated test tone, offered in two formats via &lt;source&gt;:</p>
+  <audio controls>
+    <source src="/assets/audio/demo-tone.mp3" type="audio/mpeg">
+    <source src="/assets/audio/demo-tone.ogg" type="audio/ogg">
+    Your browser does not support the audio element.
+  </audio>
+</section>
+
+<section>
+  <h2>Video</h2>
+  <p>A four-second generated test pattern, again with two &lt;source&gt; formats:</p>
+  <video controls width="480" height="270">
+    <source src="/assets/video/demo-clip.mp4" type="video/mp4">
+    <source src="/assets/video/demo-clip.webm" type="video/webm">
+    Your browser does not support the video element.
+  </video>
+</section>
+
+<section>
+  <h2>Canvas</h2>
+  <p>A minimal (under 15 lines) script draws directly into the canvas below:</p>
+  <canvas id="demo-canvas" width="300" height="120">Your browser does not support canvas.</canvas>
+</section>
+
+<section>
+  <h2>MathML</h2>
+  <p>Mass-energy equivalence, as described by Einstein:</p>
+  <math xmlns="http://www.w3.org/1998/Math/MathML">
+    <mrow>
+      <mi>E</mi>
+      <mo>=</mo>
+      <mi>m</mi>
+      <msup><mi>c</mi><mn>2</mn></msup>
+    </mrow>
+  </math>
+  <p>MathML has technically been part of the HTML specification since HTML4/XHTML,
+  but for most of that time it wasn't practical to rely on: WebKit/Blink browsers
+  (Safari, and Chrome and Edge by extension) shipped no native MathML rendering for
+  over a decade, so cross-browser use meant polyfilling with JavaScript (e.g.
+  MathJax) instead of using the native element. Per caniuse.com, Chrome and Edge
+  only added baseline native MathML Core support around version 109 (January 2023);
+  Firefox had supported it since the mid-2000s, and Safari added modern support
+  sometime between 2021 and 2022. Only once every major engine agreed did
+  &lt;math&gt; become something developers could use directly, without a fallback
+  library.</p>
+</section>

@@ -1,0 +1,31 @@
+---
+layout: layouts/base.njk
+title: Projects
+description: "Course and personal software projects by Pranav Ganesan."
+permalink: /projects/
+---
+<section>
+  <h1>Projects</h1>
+  <p>A few things I've built, some for class and some just because I wanted to.
+  Each one has a short write-up on what the problem was and what I ended up doing
+  about it.</p>
+
+  {%- for project in projects %}
+  <article>
+    <h2><a href="/projects/{{ project.slug }}/">{{ project.title }}</a></h2>
+    <img src="{{ project.image }}" alt="{{ project.alt }}" width="320" height="190">
+    <p>{{ project.listBlurb }}
+    <a href="/projects/{{ project.slug }}/">Read more &rarr;</a></p>
+  </article>
+  {%- endfor %}
+</section>
+
+<section>
+  <h2>How I Usually Work</h2>
+  <ol>
+    <li>Figure out the actual problem before writing any code</li>
+    <li>Sketch a low-fidelity plan first</li>
+    <li>Get something working end to end, then make it nice</li>
+    <li>Test it, fix what's broken, write up what I learned</li>
+  </ol>
+</section>

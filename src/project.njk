@@ -1,0 +1,36 @@
+---
+layout: layouts/base.njk
+pagination:
+  data: projects
+  size: 1
+  alias: project
+permalink: "/projects/{{ project.slug }}/"
+eleventyComputed:
+  title: "{{ project.title }}"
+  description: "Project write-up: {{ project.title }}."
+---
+<article>
+  <h1>{{ project.title }}</h1>
+  <p>{{ project.timeframe }}</p>
+  <img src="{{ project.image }}" alt="{{ project.alt }}" width="640" height="380">
+
+  <section>
+    <h2>Problem</h2>
+    <p>{{ project.problem }}</p>
+  </section>
+  <section>
+    <h2>Approach</h2>
+    <p>{{ project.approach }} I used {% for tech in project.stack %}<b>{{ tech }}</b>{% if not loop.last %} and {% endif %}{% endfor %} for this one.</p>
+    <ul>
+      {%- for feature in project.features %}
+      <li>{{ feature }}</li>
+      {%- endfor %}
+    </ul>
+  </section>
+  <section>
+    <h2>Outcome</h2>
+    <p>{{ project.outcome }}</p>
+  </section>
+
+  <p><a href="/projects/">&larr; Back to all projects</a></p>
+</article>
