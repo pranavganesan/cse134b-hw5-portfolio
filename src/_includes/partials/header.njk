@@ -1,0 +1,22 @@
+<header>
+  <p class="brand">
+    <picture>
+      <source media="(max-width: 480px)" srcset="/assets/images/logo-square.png">
+      <img src="/assets/images/logo-wide.png" alt="{{ site.author }} portfolio logo" width="160" height="40">
+    </picture>
+    <span>{{ site.author }}</span>'s portfolio
+  </p>
+  <nav aria-label="Primary">
+    <ul>
+      {%- for item in site.nav %}
+      <li><a href="{{ item.url }}"{% if page.url == item.url %} aria-current="page"{% endif %}>{{ item.label }}</a></li>
+      {%- endfor %}
+    </ul>
+  </nav>
+  <fieldset class="theme-picker" hidden>
+    <legend>Theme</legend>
+    <label><input type="radio" name="theme" value="light"> Light</label>
+    <label><input type="radio" name="theme" value="dark"> Dark</label>
+    <label><input type="radio" name="theme" value="system" checked> System</label>
+  </fieldset>
+</header>

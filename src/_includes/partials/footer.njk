@@ -1,0 +1,12 @@
+<footer>
+  <nav aria-label="Footer">
+    <ul>
+      {%- for link in site.social %}
+      <li><a href="{{ link.url }}" target="_blank" rel="noopener">{{ link.label }}</a></li>
+      {%- endfor %}
+      <li><a href="/experiments/">Experiments (HTML tag demos)</a></li>
+    </ul>
+  </nav>
+  <p>&copy; {{ site.year }} {{ site.author }}. Built for CSE 134B, Summer I 2026.</p>
+  <hello-world-log></hello-world-log>
+</footer>

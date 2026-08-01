@@ -1,0 +1,339 @@
+/* ==========================================================================
+   Base stylesheet, HW5.
+   Theme baseline (Part 1, Option A) works with ZERO JavaScript:
+   - `color-scheme: light dark` + `light-dark()` follow the user's OS
+     preference (prefers-color-scheme) automatically.
+   - JavaScript only ever sets `data-theme` on <html>; the two attribute
+     rules below are the entire "override" mechanism. No inline styles.
+   ========================================================================== */
+
+:root {
+  /* Follows prefers-color-scheme by default. */
+  color-scheme: light dark;
+
+  --color-bg: light-dark(#fdfdfb, #16191d);
+  --color-surface: light-dark(#f0f2f4, #21262c);
+  --color-text: light-dark(#22272c, #d7dde3);
+  --color-muted: light-dark(#51595f, #9aa4ad);
+  --color-accent: light-dark(#12314f, #8db9e8);
+  --color-accent-warm: light-dark(#b34c1c, #e8a175);
+  --color-border: light-dark(#c9ced4, #3a4149);
+  --color-focus: light-dark(#b34c1c, #e8a175);
+
+  --space: 1rem;
+  --radius: 0.4rem;
+  --measure: 70ch;
+}
+
+/* User override, applied by js/theme.js as data-theme on <html>. */
+:root[data-theme="light"] { color-scheme: light; }
+:root[data-theme="dark"]  { color-scheme: dark; }
+
+/* prefers-color-scheme is also used directly: soften bright screenshots and
+   media when the resolved scheme is dark (system dark with no override, or an
+   explicit dark override). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) img,
+  :root:not([data-theme="light"]) video {
+    filter: brightness(0.85);
+  }
+}
+:root[data-theme="dark"] img,
+:root[data-theme="dark"] video {
+  filter: brightness(0.85);
+}
+
+/* ---------- Reset-ish ---------- */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0 auto;
+  max-width: 60rem;
+  padding: 0 var(--space);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  line-height: 1.6;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+img, video, canvas, iframe {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ---------- Skip link ---------- */
+
+.skip-link {
+  position: absolute;
+  left: -100vw;
+  top: 0;
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  padding: 0.5em 1em;
+}
+
+.skip-link:focus {
+  left: 0;
+  z-index: 10;
+}
+
+/* ---------- Header & navigation ---------- */
+
+header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space);
+  padding: var(--space) 0;
+  border-block-end: 2px solid var(--color-border);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5em;
+  margin: 0;
+  font-weight: 600;
+}
+
+header nav ul,
+footer nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25em 1em;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+nav a {
+  color: var(--color-accent);
+  text-decoration: none;
+  padding: 0.25em 0;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+nav a[aria-current="page"] {
+  font-weight: 700;
+  border-block-end: 3px solid var(--color-accent-warm);
+}
+
+/* ---------- Theme picker (revealed by JS; absent-by-default otherwise) ---------- */
+
+.theme-picker {
+  margin-inline-start: auto;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.25em 0.75em;
+  font-size: 0.85rem;
+}
+
+.theme-picker legend {
+  padding: 0 0.25em;
+}
+
+.theme-picker label {
+  margin-inline-end: 0.5em;
+}
+
+/* ---------- General content ---------- */
+
+main {
+  padding-block: var(--space);
+}
+
+section, article {
+  max-width: var(--measure);
+}
+
+h1, h2, h3 {
+  line-height: 1.2;
+  color: var(--color-accent);
+}
+
+a {
+  color: var(--color-accent);
+}
+
+:focus-visible {
+  outline: 3px solid var(--color-focus);
+  outline-offset: 2px;
+}
+
+skill-chip {
+  display: inline-block;
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  padding: 0.1em 0.7em;
+  border-radius: 1em;
+  font-size: 0.85em;
+  margin: 0.1em;
+}
+
+/* ---------- Forms (native validation feedback, no JS involved) ---------- */
+
+input, textarea, button, select {
+  font: inherit;
+  color: inherit;
+}
+
+input, textarea {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.4em 0.6em;
+  width: 100%;
+  max-width: 30rem;
+}
+
+button {
+  background-color: var(--color-accent);
+  color: var(--color-bg);
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  padding: 0.4em 1.2em;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: var(--color-accent-warm);
+}
+
+fieldset {
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+}
+
+input:user-invalid,
+textarea:user-invalid {
+  border-color: light-dark(#a4262c, #ff8389);
+  border-width: 2px;
+}
+
+input:user-valid,
+textarea:user-valid {
+  border-color: light-dark(#1e7a3c, #6cc286);
+}
+
+/* ---------- Footer ---------- */
+
+footer {
+  border-block-start: 2px solid var(--color-border);
+  padding-block: var(--space);
+  color: var(--color-muted);
+  font-size: 0.9rem;
+}
+
+/* ---------- <gh-activity> widget (Part 2) ---------- */
+
+gh-activity {
+  display: block;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: var(--space);
+  background-color: var(--color-surface);
+}
+
+gh-activity .gh-repos {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+gh-activity .gh-repos li {
+  padding-block: 0.5em;
+  border-block-end: 1px solid var(--color-border);
+}
+
+gh-activity .gh-repos li:last-child {
+  border-block-end: none;
+}
+
+gh-activity .gh-name {
+  font-weight: 600;
+}
+
+gh-activity .gh-desc,
+gh-activity .gh-meta {
+  margin: 0.15em 0;
+}
+
+gh-activity .gh-meta {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+}
+
+gh-activity .gh-credit {
+  color: var(--color-muted);
+  margin-block-end: 0;
+}
+
+/* State is reflected to the DOM as data-state so CSS can respond. */
+gh-activity[data-state="loading"] .gh-status {
+  font-style: italic;
+}
+
+gh-activity[data-state="loading"] .gh-status::after {
+  content: "…";
+  display: inline-block;
+  animation: gh-pulse 1s ease-in-out infinite;
+}
+
+@keyframes gh-pulse {
+  50% { opacity: 0.2; }
+}
+
+gh-activity[data-state="error"] .gh-status {
+  color: light-dark(#a4262c, #ff8389);
+  font-weight: 600;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  gh-activity[data-state="loading"] .gh-status::after {
+    animation: none;
+  }
+}
+
+/* ---------- Search page ---------- */
+
+.search-results {
+  padding-inline-start: 1.2em;
+}
+
+.search-results li {
+  margin-block-end: var(--space);
+}
+
+.search-results mark {
+  background-color: light-dark(#ffe08a, #7a5d00);
+  color: inherit;
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 480px) {
+  header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .theme-picker {
+    margin-inline-start: 0;
+  }
+}
+
+/* ---------- Misc ---------- */
+
+.noscript-note {
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius);
+  padding: 0.5em 1em;
+}

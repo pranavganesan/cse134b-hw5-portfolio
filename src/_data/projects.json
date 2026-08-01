@@ -1,0 +1,59 @@
+[
+  {
+    "slug": "campus-event-finder",
+    "title": "Project One: Campus Event Finder",
+    "shortTitle": "Campus Event Finder",
+    "blurb": "A full-stack app that actually pulls campus events into one place so people stop missing them.",
+    "listBlurb": "Helps students find on-campus events filtered by interest, building, and date.",
+    "timeframe": "Built this on my own over about 6 weeks, Spring 2026. In my project folder I just called it Nightowl.",
+    "image": "/assets/images/project-01.png",
+    "alt": "Screenshot of the Campus Event Finder app showing a filterable list of events",
+    "problem": "Students at my school missed events they would have liked to attend simply because listings were scattered across five different club websites and a PDF calendar that was rarely updated.",
+    "approach": "I built a single searchable events page that pulls listings into one place and lets students filter by interest tag, building, and date.",
+    "stack": ["Node.js", "SQLite"],
+    "features": [
+      "Filter events by tag, location, and date range",
+      "Mobile-friendly list and detail views",
+      "Simple submission form for club organizers"
+    ],
+    "outcome": "Around 40 students used the tool during its first week on campus, and two club officers asked to keep using it as their primary listing page."
+  },
+  {
+    "slug": "habit-tracker",
+    "title": "Project Two: Habit Tracker",
+    "shortTitle": "Habit Tracker",
+    "blurb": "A small habit tracker I made because every other one felt overbuilt for what I actually needed.",
+    "listBlurb": "A small habit-tracking tool with streaks and a weekly review.",
+    "timeframe": "Built this on my own over about 3 weeks, Winter 2026.",
+    "image": "/assets/images/project-02.png",
+    "alt": "Screenshot of the Habit Tracker app showing a weekly grid of habits and streaks",
+    "problem": "Most habit trackers I tried were either too simple (a bare checklist) or too complex (full analytics dashboards I never opened).",
+    "approach": "I designed a minimal weekly grid: one row per habit, one column per day, and a streak counter that updates as you go.",
+    "stack": ["React", "localStorage"],
+    "features": [
+      "Weekly grid view with one-tap check-off",
+      "Automatic streak calculation",
+      "Data stored entirely on-device, no account needed"
+    ],
+    "outcome": "I've used it daily for over two months, which is longer than any habit tracker I've tried before building my own."
+  },
+  {
+    "slug": "recipe-box",
+    "title": "Project Three: Recipe Box",
+    "shortTitle": "Recipe Box",
+    "blurb": "A recipe manager so my family would stop texting each other blurry photos of index cards.",
+    "listBlurb": "A searchable, taggable recipe manager.",
+    "timeframe": "Built this on my own over about 4 weeks, Fall 2025.",
+    "image": "/assets/images/project-03.png",
+    "alt": "Screenshot of the Recipe Box app showing a searchable grid of recipe cards",
+    "problem": "My family's recipes were split between a shared folder of phone photos, a handful of bookmarked sites, and a few handwritten cards.",
+    "approach": "I built a small app for entering recipes once, tagging them by cuisine and ingredient, and finding them again by searching any of those tags.",
+    "stack": ["Python", "Flask"],
+    "features": [
+      "Tag-based search across ingredients and cuisine",
+      "Printable single-recipe view",
+      "Import form for adding new recipes quickly"
+    ],
+    "outcome": "The whole family now adds new recipes there instead of texting photos of index cards to each other."
+  }
+]
