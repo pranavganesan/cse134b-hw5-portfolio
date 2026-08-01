@@ -1,0 +1,12 @@
+# Generated output — Netlify rebuilds this from source on every push.
+_site/
+
+# Dependencies
+node_modules/
+
+# Environment files (build-time/server-side only; never commit secrets)
+.env
+.env.*
+
+# OS noise
+.DS_Store

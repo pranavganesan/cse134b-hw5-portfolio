@@ -1,0 +1,15 @@
+{
+  "name": "hw5-portfolio",
+  "version": "1.0.0",
+  "private": true,
+  "description": "CSE 134B HW5: portfolio site built with Eleventy, deployed from source.",
+  "scripts": {
+    "dev": "eleventy --serve",
+    "start": "eleventy --serve",
+    "build": "eleventy && pagefind --site _site"
+  },
+  "devDependencies": {
+    "@11ty/eleventy": "^3.0.0",
+    "pagefind": "^1.3.0"
+  }
+}

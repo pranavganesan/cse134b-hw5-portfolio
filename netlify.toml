@@ -1,0 +1,7 @@
+# Netlify builds the site from source on every push.
+[build]
+  command = "npm run build"
+  publish = "_site"
+
+[build.environment]
+  NODE_VERSION = "20"
