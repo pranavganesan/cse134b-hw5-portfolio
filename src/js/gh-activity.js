@@ -146,6 +146,29 @@ class GhActivity extends HTMLElement {
     }
   }
 
+  // Builds one semantic list item (<li> with link, description, and metadata)
+  // entirely with DOM creation — same shape as #gh-repo-template.
+  #buildItem() {
+    const li = document.createElement("li");
+    const link = document.createElement("a");
+    link.className = "gh-name";
+    const desc = document.createElement("p");
+    desc.className = "gh-desc";
+    const meta = document.createElement("p");
+    meta.className = "gh-meta";
+    const lang = document.createElement("span");
+    lang.className = "gh-lang";
+    const stars = document.createElement("span");
+    stars.className = "gh-stars";
+    const time = document.createElement("time");
+    time.className = "gh-updated";
+    meta.append(lang, " ", stars, " ", time);
+    li.append(link, desc, meta);
+    const fragment = document.createDocumentFragment();
+    fragment.append(li);
+    return fragment;
+  }
+
   #render(repos, user) {
     this.#list.replaceChildren();
 
@@ -157,7 +180,10 @@ class GhActivity extends HTMLElement {
 
     const itemTpl = document.getElementById("gh-repo-template");
     for (const repo of repos) {
-      const item = itemTpl.content.cloneNode(true);
+      // Preferred path: clone the <li> structure from the page's <template>.
+      // Fallback: build the same semantic <li> record with createElement so
+      // the list still renders if the host page omits the item template.
+      const item = itemTpl ? itemTpl.content.cloneNode(true) : this.#buildItem();
 
       const link = item.querySelector(".gh-name");
       link.textContent = repo.name;

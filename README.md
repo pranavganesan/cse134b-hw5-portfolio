@@ -111,8 +111,7 @@ guarded. Attribution ("Data from the GitHub REST API") renders in the widget.
 
 ## Other JavaScript
 
-`js/theme.js` (Part 1, above), `js/components.js` (the `<hello-world-log>`
-console-only element carried forward from HW2), `js/canvas-demo.js` (the
+`js/theme.js` (Part 1, above), `js/canvas-demo.js` (the
 under-15-line canvas drawing on Experiments), and `js/search.js` (extra
 credit, below). All are external files under `js/`, loaded with
 `type="module"` or `defer`; there are no inline event-handler attributes and
