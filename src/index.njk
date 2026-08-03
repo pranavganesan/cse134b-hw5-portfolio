@@ -2,8 +2,12 @@
 layout: layouts/base.njk
 title: Home
 description: "Computer science student portfolio: projects, background, and contact information."
+pageClass: aesthetic-brutalist
+styles:
+  - brutalist.css
 scripts:
   - gh-activity.js
+  - brutalist.js
 ---
 <section>
   <h1>{{ site.author }}</h1>
@@ -17,6 +21,9 @@ scripts:
     <skill-chip>Python</skill-chip>
   </p>
   <p><a href="/projects/">View my projects</a> &middot; <a href="/about/">About me</a></p>
+  <p class="raw-caption">This page is styled — but a page is markup wearing a costume.</p>
+  <button type="button" class="raw-toggle" hidden>View Raw HTML</button>
+  <pre id="raw-output" class="raw-output" hidden></pre>
 </section>
 
 <section>

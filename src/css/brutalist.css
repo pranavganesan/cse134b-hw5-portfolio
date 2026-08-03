@@ -1,0 +1,260 @@
+/* ==========================================================================
+   Brutalist aesthetic — CSE134B extra credit, applied to the home page only.
+
+   How this is scoped: this file loads *in addition to* base.css (see
+   head.njk's `styles` loop) and every rule here lives under
+   `:root.aesthetic-brutalist`. That class is only ever set on <html> when a
+   page's front matter asks for it (index.njk does; nothing else does), so
+   every other page keeps the plain default site untouched — this is meant
+   to be additive on top of the existing default styling, not a replacement
+   for it.
+
+   The trick that makes this file short: base.css already routes every
+   component (header, nav, buttons, the gh-activity widget, focus rings...)
+   through a small set of --color-* custom properties instead of hardcoding
+   colors per rule. So the biggest lever here is just redefining those same
+   tokens for both light and dark (still via light-dark(), exactly like
+   base.css does) — most components re-skin for free. What's added on top is
+   brutalism-specific: square corners, thick borders, hard offset shadows,
+   monospace display type, and a grayscale image treatment.
+   ========================================================================== */
+
+:root.aesthetic-brutalist {
+  /* ---- palette: near-black/white + a single hazard-red accent ----
+     Every pair below was checked against WCAG 1.4.3 (4.5:1 minimum for
+     body text) with a contrast script, not eyeballed:
+       black #000 / white #fff            21.00:1
+       white #f5f5f5 / near-black #0a0a0a  18.16:1
+       red #D7263D / white                  4.96:1  (light-mode accent text)
+       red #FF4D6D / near-black             6.16:1  (dark-mode accent text)
+       black text / hazard yellow #FFE600  16.57:1  (dark-mode focus ring
+                                                       against its own bg —
+                                                       decorative, not text,
+                                                       but comfortably clears
+                                                       the 3:1 non-text
+                                                       minimum too) */
+  --color-bg: light-dark(#ffffff, #0a0a0a);
+  --color-surface: light-dark(#efefef, #1a1a1a);
+  --color-text: light-dark(#000000, #f5f5f5);
+  --color-muted: light-dark(#555555, #b8b8b8);
+  --color-accent: light-dark(#000000, #f5f5f5);
+  --color-accent-warm: light-dark(#D7263D, #FF4D6D);
+  --color-border: light-dark(#000000, #f5f5f5);
+
+  /* Focus needs to win against both the black-on-white and white-on-black
+     halves of this palette, so it doesn't just reuse --color-accent-warm —
+     black-on-black-bg-elements would be invisible in dark mode. Yellow
+     against near-black clears WCAG 1.4.11 Non-text Contrast (AA, 3:1) by a
+     wide margin; black against white does too. */
+  --color-focus: light-dark(#000000, #FFE600);
+
+  --radius: 0;               /* brutalism doesn't round corners */
+  --font-mono: ui-monospace, "SFMono-Regular", "Cascadia Code", "Roboto Mono",
+    consolas, "Liberation Mono", monospace;
+  --border-w: 3px;
+  --shadow-offset: 6px;      /* the hard "sticker" drop-shadow used throughout */
+}
+
+@media (max-width: 480px) {
+  :root.aesthetic-brutalist {
+    --border-w: 2px;
+    --shadow-offset: 4px;    /* smaller hard-shadow so it can't push content
+                                 into horizontal overflow at ~375px */
+  }
+}
+
+/* ---------- global type ----------
+   Body copy stays in the system sans-serif from base.css rather than going
+   monospace everywhere — full-width monospace paragraphs are noticeably
+   harder to scan for long-form reading, and readability of the actual
+   content matters more than aesthetic purity here. Monospace is reserved
+   for "label-like" text: headings, nav, buttons, the brand, chips — the
+   parts of the page that are structural/UI rather than prose. */
+:root.aesthetic-brutalist body {
+  background-image:
+    linear-gradient(var(--color-border) 1px, transparent 1px),
+    linear-gradient(90deg, var(--color-border) 1px, transparent 1px);
+  background-size: 2rem 2rem;
+  background-position: -1px -1px;
+  background-color: var(--color-bg);
+}
+
+@media (prefers-contrast: more) {
+  /* the faint background grid is decorative; drop it rather than risk it
+     competing with text for anyone who's asked the OS for more contrast */
+  :root.aesthetic-brutalist body {
+    background-image: none;
+  }
+}
+
+:root.aesthetic-brutalist h1,
+:root.aesthetic-brutalist h2,
+:root.aesthetic-brutalist h3,
+:root.aesthetic-brutalist .brand,
+:root.aesthetic-brutalist nav a,
+:root.aesthetic-brutalist button,
+:root.aesthetic-brutalist skill-chip,
+:root.aesthetic-brutalist .theme-picker legend {
+  font-family: var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+:root.aesthetic-brutalist h1 {
+  font-size: clamp(2.2rem, 5vw + 1rem, 4.5rem);  /* fluid: never forces
+    horizontal scroll at 375px, still reads as a poster headline on desktop */
+  font-weight: 800;
+  border-bottom: var(--border-w) solid var(--color-text);
+  padding-bottom: 0.2em;
+  margin-bottom: 0.4em;
+}
+
+:root.aesthetic-brutalist h2 {
+  font-weight: 800;
+  display: inline-block;
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  padding: 0.15em 0.5em;
+}
+
+/* ---------- header ---------- */
+
+:root.aesthetic-brutalist header {
+  border-block-end: var(--border-w) solid var(--color-text);
+  background-color: var(--color-surface);
+  margin-inline: calc(var(--space) * -1);
+  padding-inline: var(--space);
+}
+
+:root.aesthetic-brutalist .brand {
+  font-weight: 800;
+}
+
+:root.aesthetic-brutalist nav a {
+  border: var(--border-w) solid transparent;
+  padding: 0.2em 0.5em;
+}
+
+:root.aesthetic-brutalist nav a:hover {
+  text-decoration: none;
+  border-color: var(--color-text);
+}
+
+:root.aesthetic-brutalist nav a[aria-current="page"] {
+  border-color: var(--color-text);
+  background-color: var(--color-text);
+  color: var(--color-bg);
+}
+
+:root.aesthetic-brutalist .theme-picker {
+  border: var(--border-w) solid var(--color-text);
+  border-radius: 0;
+}
+
+/* ---------- project cards ---------- */
+
+:root.aesthetic-brutalist article {
+  border: var(--border-w) solid var(--color-text);
+  background-color: var(--color-surface);
+  padding: var(--space);
+  margin-block-end: calc(var(--space) + var(--shadow-offset));
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-accent-warm);
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  :root.aesthetic-brutalist article {
+    transition: transform 0.1s ease-out, box-shadow 0.1s ease-out;
+  }
+}
+
+/* Hard-shadow "press" on hover/focus: the card slides into its own shadow.
+   Applied on :focus-within too, not just :hover, so keyboard users tabbing
+   to the link inside the card see the same feedback a mouse user gets —
+   this is a hover effect with a keyboard-reachable equivalent, not a
+   hover-only affordance. */
+:root.aesthetic-brutalist article:hover,
+:root.aesthetic-brutalist article:focus-within {
+  transform: translate(var(--shadow-offset), var(--shadow-offset));
+  box-shadow: 0 0 0 0 var(--color-accent-warm);
+}
+
+:root.aesthetic-brutalist article img {
+  border: var(--border-w) solid var(--color-text);
+  filter: grayscale(1) contrast(1.1);
+}
+
+:root.aesthetic-brutalist skill-chip {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 0;
+  font-size: 0.8em;
+  padding: 0.15em 0.6em;
+}
+
+/* ---------- gh-activity widget ---------- */
+
+:root.aesthetic-brutalist gh-activity {
+  border: var(--border-w) solid var(--color-text);
+  border-radius: 0;
+  box-shadow: var(--shadow-offset) var(--shadow-offset) 0 0 var(--color-border);
+}
+
+:root.aesthetic-brutalist gh-activity .gh-name {
+  font-family: var(--font-mono);
+}
+
+/* ---------- buttons ---------- */
+
+:root.aesthetic-brutalist button {
+  background-color: var(--color-text);
+  color: var(--color-bg);
+  border: var(--border-w) solid var(--color-text);
+  border-radius: 0;
+  font-weight: 700;
+}
+
+:root.aesthetic-brutalist button:hover {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* ---------- footer ---------- */
+
+:root.aesthetic-brutalist footer {
+  border-block-start: var(--border-w) solid var(--color-text);
+  margin-inline: calc(var(--space) * -1);
+  padding-inline: var(--space);
+  background-color: var(--color-surface);
+}
+
+/* ---------- raw-HTML toggle (JS enhancement, see brutalist.js) ----------
+   Ships hidden in the markup; brutalist.js removes [hidden] once it has
+   wired up the click handler, matching the theme-picker's own
+   progressive-enhancement pattern elsewhere on this site. */
+
+:root.aesthetic-brutalist .raw-toggle {
+  margin-block-end: var(--space);
+}
+
+:root.aesthetic-brutalist .raw-output {
+  display: block;
+  max-height: 22rem;
+  overflow: auto;
+  margin: 0 0 var(--space);
+  padding: var(--space);
+  border: var(--border-w) solid var(--color-text);
+  background-color: #0a0a0a;
+  color: #5fff9f;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+:root.aesthetic-brutalist .raw-caption {
+  color: var(--color-muted);
+  font-size: 0.85rem;
+  font-style: italic;
+}
